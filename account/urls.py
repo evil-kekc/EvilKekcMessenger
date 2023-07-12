@@ -1,8 +1,10 @@
 from django.urls import path, include
-from django.contrib.auth import views as auth_views
+
 from . import views
 
 urlpatterns = [
     path('', include('django.contrib.auth.urls')),
-    path('', views.home, name='home'),
+    path('registration/', views.registration, name='registration'),
+    path('home/', views.home, name='home'),
+    path('search/', views.search, name='search')
 ]

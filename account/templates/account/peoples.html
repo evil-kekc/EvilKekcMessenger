@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}My Messenger - People Search{% endblock %}
+
+{% block content %}
+    <h1>People Search</h1>
+
+    <form method="GET" action="{% url 'search' %}">
+        <label>
+            <input type="text" name="query" placeholder="Enter username">
+        </label>
+        <p><input type="submit" value="Search"></p>
+    </form>
+
+    {% if results %}
+        <h2>Search Results</h2>
+        <ul>
+            {% for user in results %}
+                <li>@{{ user.username }} | {{ user.get_full_name }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No search results found.</p>
+    {% endif %}
+{% endblock %}
