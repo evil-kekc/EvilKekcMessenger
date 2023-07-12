@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Мой Мессенджер - {% endblock %}
+
+{% block content %}
+    <h1>Добро пожаловать в Мой Мессенджер!</h1>
+
+    <!-- Добавьте здесь содержимое мессенджера -->
+
+    {% if messages %}
+        <h2>Сообщения</h2>
+        <ul>
+            {% for message in messages %}
+                <li>
+                    <strong>От:</strong> {{ message.sender.username }}<br>
+                    <strong>Кому:</strong> {{ message.recipient.username }}<br>
+                    <strong>Содержимое:</strong> {{ message.content }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>
+            Сообщений пока нет...
+        </p>
+    {% endif %}
+{% endblock %}
