@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}User Profile - {{ user.username }}{% endblock %}
+
+{% block content %}
+    <div class="user-profile">
+        <h1 class="user-profile__title">User Profile</h1>
+        <div class="user-profile__info">
+            <div class="user-profile__field">
+                <span class="user-profile__label">Username:</span>
+                <span class="user-profile__value">{{ user.username }}</span>
+            </div>
+            <div class="user-profile__field">
+                <span class="user-profile__label">Full Name:</span>
+                <span class="user-profile__value">{{ user.get_full_name }}</span>
+            </div>
+            <div class="user-profile__field">
+                <span class="user-profile__label">Email:</span>
+                <span class="user-profile__value">{{ user.email }}</span>
+            </div>
+            <div class="user-profile__field">
+                <span class="user-profile__label">Joined:</span>
+                <span class="user-profile__value">{{ user.date_joined }}</span>
+            </div>
+        </div>
+    </div>
+{% endblock %}

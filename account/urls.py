@@ -6,5 +6,6 @@ urlpatterns = [
     path('', include('django.contrib.auth.urls')),
     path('registration/', views.registration, name='registration'),
     path('home/', views.home, name='home'),
-    path('search/', views.search, name='search')
+    path('search/', views.search, name='search'),
+    path('user/<str:username>', views.user_page_view, name='user_detail')
 ]
