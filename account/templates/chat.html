@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Chat
+{% endblock %}
+
+{% block content %}
+    <body>
+    <div class="chat-container">
+        <div class="chat-header">
+            <h1>Chat</h1>
+        </div>
+        <div class="chat-messages">
+            {% for message in messages %}
+                <div class="message">
+                    {% if message.recipient.username == username %}
+                        <span class="username">You:</span>
+                    {% else %}
+                        <span class="username">{{ message.recipient.first_name }}:</span>
+                    {% endif %}
+                    <span class="content">{{ message.content }}</span>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="chat-input">
+            <form id="message-form" action="{% url 'chat' username %}" method="POST">
+                {% csrf_token %}
+                <label>
+                    <input type="text" name="message" placeholder="Enter your message" autocomplete="off">
+                </label>
+                <button type="submit">Send</button>
+            </form>
+        </div>
+    </div>
+    </body>
+{% endblock %}

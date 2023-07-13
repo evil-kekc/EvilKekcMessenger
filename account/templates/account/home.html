@@ -1,26 +1,71 @@
 {% extends "base.html" %}
 
-{% block title %}Мой Мессенджер - {% endblock %}
+{% block title %}My Messenger{% endblock %}
 
 {% block content %}
-    <h1>Добро пожаловать в Мой Мессенджер!</h1>
+    <style>
+        .chat-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+        }
 
-    <!-- Добавьте здесь содержимое мессенджера -->
+        .chat-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
 
-    {% if messages %}
-        <h2>Сообщения</h2>
-        <ul>
-            {% for message in messages %}
-                <li>
-                    <strong>От:</strong> {{ message.sender.username }}<br>
-                    <strong>Кому:</strong> {{ message.recipient.username }}<br>
-                    <strong>Содержимое:</strong> {{ message.content }}
-                </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>
-            Сообщений пока нет...
-        </p>
-    {% endif %}
+        .chat-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .chat-item {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #fff;
+        }
+
+        .chat-item strong {
+            font-weight: bold;
+        }
+
+        .chat-item a {
+            color: #0000FF;
+            text-decoration: none;
+        }
+
+        .chat-item a:hover {
+            text-decoration: underline;
+        }
+    </style>
+
+    <div class="chat-container">
+        <div class="chat-header">
+            <h1>Welcome to My Messenger!</h1>
+        </div>
+
+        {% if chats %}
+            <h2>Chats</h2>
+            <ul class="chat-list">
+                {% for chat in chats %}
+                    <li class="chat-item">
+                        <strong>User:</strong>
+                        <a href="{% url 'chat' chat.user.username %}">@{{ chat.user.username }}</a>
+                        - {{ chat.user.get_full_name }}<br>
+                        <strong>Last message:</strong> {{ chat.last_message.content }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>
+                No chat yet...
+            </p>
+        {% endif %}
+    </div>
 {% endblock %}

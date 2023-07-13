@@ -380,6 +380,8 @@ img.user-detail {
     outline: none;
 }
 
+/* user profile */
+
 .user-profile {
     max-width: 400px;
     margin: 0 auto;
@@ -410,4 +412,72 @@ img.user-detail {
 .user-profile__value {
     font-style: italic;
 }
+
+/* chat */
+
+.chat-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+}
+
+.chat-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.chat-messages {
+    max-height: 400px;
+    overflow-y: scroll;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+}
+
+.chat-messages .message {
+    margin-bottom: 10px;
+}
+
+.chat-messages .username {
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.chat-input {
+    margin-top: 20px;
+}
+
+.chat-input input[type="text"] {
+    width: 80%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.chat-input button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: #4caf50;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.chat-input button:hover {
+    background-color: #45a049;
+}
+
+.chat-input input[type="text"]:focus,
+.chat-input button:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
 
