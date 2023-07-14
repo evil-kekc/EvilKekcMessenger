@@ -58,7 +58,7 @@
                         <strong>User:</strong>
                         <a href="{% url 'chat' chat.user.username %}">@{{ chat.user.username }}</a>
                         - {{ chat.user.get_full_name }}<br>
-                        <strong>Last message:</strong> {{ chat.last_message.content }}
+                        <strong>Last message:</strong> {{ chat.last_message.content|truncatechars:50 }}
                     </li>
                 {% endfor %}
             </ul>
