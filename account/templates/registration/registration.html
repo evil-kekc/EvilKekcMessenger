@@ -23,14 +23,20 @@
 
         .form-field input[type="text"],
         .form-field input[type="password"] {
-            width: 100%;
+            width: 300px; /* Измените эту ширину по вашему усмотрению */
             padding: 5px;
             border: 1px solid #ccc;
             border-radius: 4px;
         }
 
-        .error {
+        .error-message {
             color: red;
+            margin-top: 5px;
+        }
+
+        .success-message {
+            color: green;
+            margin-top: 5px;
         }
 
         .form-actions {
@@ -49,31 +55,61 @@
 
     <h1>Registration</h1>
     <div class="registration-form">
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li {% if message.tags %}class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
         <form method="post">
             {% csrf_token %}
             <div class="form-field">
                 <label for="{{ form.email.id_for_label }}">Email:</label>
                 {{ form.email }}
                 {% if form.errors.email %}
-                    <p class="error">{{ form.errors.email }}</p>
+                    <p class="error-message">{{ form.errors.email }}</p>
                 {% endif %}
             </div>
             <div class="form-field">
                 <label for="{{ form.username.id_for_label }}">Username:</label>
                 {{ form.username }}
+                {% if form.errors.username %}
+                    <p class="error-message">{{ form.errors.username }}</p>
+                {% endif %}
+            </div>
+            <div class="form-field">
+                <label for="{{ form.first_name.id_for_label }}">First name:</label>
+                {{ form.first_name }}
+                {% if form.errors.first_name %}
+                    <p class="error-message">{{ form.errors.first_name }}</p>
+                {% endif %}
+            </div>
+            <div class="form-field">
+                <label for="{{ form.last_name.id_for_label }}">Last name:</label>
+                {{ form.last_name }}
+                {% if form.errors.last_name %}
+                    <p class="error-message">{{ form.errors.last_name }}</p>
+                {% endif %}
             </div>
             <div class="form-field">
                 <label for="{{ form.password1.id_for_label }}">Password:</label>
                 {{ form.password1 }}
+                {% if form.errors.password1 %}
+                    <p class="error-message">{{ form.errors.password1 }}</p>
+                {% endif %}
             </div>
             <div class="form-field">
                 <label for="{{ form.password2.id_for_label }}">Confirm Password:</label>
                 {{ form.password2 }}
+                {% if form.errors.password2 %}
+                    <p class="error-message">{{ form.errors.password2 }}</p>
+                {% endif %}
             </div>
             <div class="form-actions">
                 <input type="submit" value="Register">
             </div>
         </form>
     </div>
-
 {% endblock %}
