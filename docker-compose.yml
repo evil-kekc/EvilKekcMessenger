@@ -1,6 +1,6 @@
 version: '3'
 services:
-  blog-app:
+  messenger-app:
     build:
       context: .
       dockerfile: Dockerfile
