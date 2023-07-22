@@ -48,7 +48,13 @@
     <div class="chat-container">
         <div class="chat-header">
             <h1>Welcome to My Messenger!</h1>
+            <p>You can
+                <a href="{% url 'edit' %}">edit your profile</a>
+                or
+                <a href="{% url 'password_change' %}">change your password</a>.
+            </p>
         </div>
+
 
         {% if chats %}
             <h2>Chats</h2>

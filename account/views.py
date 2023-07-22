@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.postgres.search import TrigramSimilarity
@@ -5,7 +6,7 @@ from django.db.models import Q
 from django.db.models.functions import Concat
 from django.shortcuts import render, redirect, get_object_or_404
 
-from .forms import SearchForm, RegistrationForm
+from .forms import SearchForm, RegistrationForm, UserEditForm, ProfileEditForm
 from .models import Message
 
 
@@ -133,3 +134,40 @@ def chat_view(request, username: str):
         'username': username,
     }
     return render(request, 'chat.html', context)
+
+
+@login_required
+def edit(request):
+    """
+
+    :param request:
+    :return:
+    """
+    if request.method == 'POST':
+        user_form = UserEditForm(
+            instance=request.user,
+            data=request.POST
+        )
+        profile_form = ProfileEditForm(
+            instance=request.user.profile,
+            data=request.POST,
+            files=request.FILES
+        )
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            messages.success(request, 'Profile updated successfully')
+        else:
+            messages.error(request, 'Error updating your profile')
+    else:
+        user_form = UserEditForm(instance=request.user)
+        profile_form = ProfileEditForm(instance=request.user.profile)
+
+    context = {
+        'user_form': user_form,
+        'profile_form': profile_form,
+    }
+
+    return render(request,
+                  'account/edit.html',
+                  context=context)

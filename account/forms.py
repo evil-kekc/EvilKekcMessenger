@@ -2,6 +2,8 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
+from account.models import Profile
+
 
 class SearchForm(forms.Form):
     query = forms.CharField()
@@ -31,3 +33,22 @@ class RegistrationForm(UserCreationForm):
         if cd['password1'] != cd['password2']:
             raise forms.ValidationError('Passwords don\'t match.')
         return cd['password2']
+
+
+class UserEditForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'email']
+
+    def clean_email(self):
+        cd = self.cleaned_data['email']
+        qs = User.objects.exclude(id=self.instance.id).filter(email=cd)
+        if qs.exists():
+            return forms.ValidationError('Email already in use')
+        return cd
+
+
+class ProfileEditForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['date_of_birth', 'photo']
